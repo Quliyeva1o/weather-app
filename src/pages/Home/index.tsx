@@ -128,7 +128,7 @@ const Home: React.FC = () => {
   ];
 
   return (
-    <div>
+    <div className="home">
       <section>
         <div>
           <div>
@@ -173,7 +173,7 @@ const Home: React.FC = () => {
                       type="dashed"
                       style={{ marginTop: 16 }}
                     >
-                      {loading ? <Spin size="small" /> : "Daha Ətraflı"}
+                      {loading ? <Spin size="small" />: !showHourlyData?  "Daha Ətraflı":"Gizlə"}
                     </Button>
                   </div>
                 </div>
