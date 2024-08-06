@@ -28,6 +28,7 @@ const Home: React.FC = () => {
             'url("https://mdbgo.io/ascensus/mdb-advanced/img/snow.gif")';
           break;
         case "Partly Cloudy":
+        case "Cloudy":
           backgroundImage =
             'url("https://mdbgo.io/ascensus/mdb-advanced/img/clouds.gif")';
           break;
@@ -38,6 +39,7 @@ const Home: React.FC = () => {
           break;
         case "Light drizzle":
         case "Patchy rain nearby":
+        case "Light rain shower":
         case "Moderate or heavy rain shower":
           backgroundImage =
             'url("https://mdbgo.io/ascensus/mdb-advanced/img/rain.gif")';
@@ -90,11 +92,11 @@ const Home: React.FC = () => {
     }
   };
 
-  const columns:any = [
+  const columns: any = [
     {
       title: "Hour",
       dataIndex: "time",
-      align: 'center',
+      align: "center",
       key: "time",
     },
 
@@ -102,7 +104,7 @@ const Home: React.FC = () => {
       title: "Temperature",
       dataIndex: "temp_c",
       key: "temp_c",
-      align: 'center',
+      align: "center",
       render: (text: number) => `${text}°C`,
     },
     {
