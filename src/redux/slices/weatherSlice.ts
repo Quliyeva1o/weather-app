@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import controller from "../../API/requests";
-import { HourlyData, WeatherData, WeatherState } from "../../types";
+import { HourlyData, WeatherState } from "../../types";
 
 const apiKey = "5301121827894aa5952115753240508";
 

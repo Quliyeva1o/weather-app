@@ -1,17 +1,14 @@
 import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 import Layout from '../layout/index';
-import { rootRoutes } from './routes';
+import Home from '../pages/Home';
 
+const AppRoutes = () => (
+  <Routes>
+    <Route path="/" element={<Layout />}>
+      <Route index element={<Home />} />
+    </Route>
+  </Routes>
+);
 
-export const routes = [
-  {
-    path: '/',
-    element: <Layout />,
-    children: rootRoutes.filter(route => route).map(route => 
-      route.index 
-      ? { index: true, element: route.element } 
-      : { path: route.path, element: route.element }
-    
-    ),
-  },
-];
+export default AppRoutes;

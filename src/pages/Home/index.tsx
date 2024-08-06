@@ -6,7 +6,7 @@ import {
   fetchHourlyData,
 } from "../../redux/slices/weatherSlice";
 import { Button, Table, Card, Typography, Spin, Input } from "antd";
-import debounce from "lodash.debounce";
+import * as lodash from "lodash";
 
 const { Text } = Typography;
 
@@ -67,27 +67,19 @@ const Home: React.FC = () => {
   };
 
   const debouncedFetchWeatherData = useCallback(
-    debounce((location: string) => {
+    lodash.debounce((location: string) => {
       dispatch(fetchWeatherData(location));
     }, 500),
     [dispatch]
   );
 
   useEffect(() => {
-    console.log(weatherData);
-
-    if (weatherData) {
-      dispatch(fetchHourlyData(weatherData.location.name));
-    }
-  }, [weatherData, dispatch]);
-
-  useEffect(() => {
     dispatch(fetchWeatherData(location));
   }, []);
 
   const handleShowHourlyData = () => {
-    setShowHourlyData(true);
-    if (weatherData) {
+    setShowHourlyData(!showHourlyData);
+    if (weatherData && !showHourlyData) {
       dispatch(fetchHourlyData(weatherData.location.name));
     }
   };
@@ -127,42 +119,36 @@ const Home: React.FC = () => {
       key: "condition",
       align: "center",
       render: (condition: any) => (
-        <div>
+        <div className="tablecondition">
           <Text>{condition.text}</Text>
-          <img src={condition.icon} alt="" className="condition-icon" />
+          <img src={condition.icon} alt="" />
         </div>
       ),
     },
   ];
 
   return (
-    <div className="home-container">
-      <section className="vh-100">
-        <div className="container py-5">
-          <div className="row d-flex justify-content-center align-items-center h-100">
-            <div className="col-md-9 col-lg-7 col-xl-5">
+    <div>
+      <section>
+        <div>
+          <div>
+            <div className="center">
               <Input
                 type="text"
                 value={location}
                 onChange={handleLocationChange}
                 placeholder="Lokasiya daxil edin..."
-                className="search-input"
               />
               <p></p>
-              <Card
-                className="text-white bg-image shadow-4-strong"
-                id="wrapper-bg"
-              >
-                <div className="card-header p-4 border-0">
-                  <div className="text-center mb-3">
-                    <p className="h2 mb-1" id="wrapper-name">
+              <Card id="wrapper-bg">
+                <div>
+                  <div>
+                    <p>
                       {weatherData?.location.name},{" "}
                       {weatherData?.location.country}
                     </p>
-                    <p className="mb-1" id="wrapper-description">
-                      {weatherData?.current.condition.text}
-                    </p>
-                    <p className="display-1 mb-1" id="wrapper-temp">
+                    <p>{weatherData?.current.condition.text}</p>
+                    <p className="temperature">
                       {weatherData?.current.temp_c}°C
                     </p>
                     <span>
@@ -171,19 +157,15 @@ const Home: React.FC = () => {
                         {weatherData?.current.pressure_mb} hPa
                       </span>
                     </span>
-                    <span className="mx-2">|</span>
+                    <span>|</span>
                     <span>
                       Humidity:{" "}
                       <span id="wrapper-humidity">
                         {weatherData?.current.humidity}%
                       </span>
                     </span>
-                    <div className="weather-icon-container">
-                      <img
-                        src={weatherData?.current.condition.icon}
-                        alt=""
-                        className="weather-icon"
-                      />
+                    <div>
+                      <img src={weatherData?.current.condition.icon} />
                     </div>
                     <Button
                       onClick={handleShowHourlyData}
@@ -200,14 +182,13 @@ const Home: React.FC = () => {
             </div>
           </div>
           {showHourlyData && hourlyData.length > 0 && (
-            <div className="card-body px-l-5">
+            <div>
               <Table
                 columns={columns}
                 bordered={true}
                 dataSource={hourlyData}
                 rowKey="time"
                 pagination={false}
-                className="weather-table"
               />
             </div>
           )}
