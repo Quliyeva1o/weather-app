@@ -5,10 +5,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React from "react";
 
 function App() {
-  const rooter = createBrowserRouter(routes);
+  const router = createBrowserRouter(routes);
   return (
     <>
-      <RouterProvider router={rooter} />
+      <RouterProvider router={router} />
     </>
   );
 }
