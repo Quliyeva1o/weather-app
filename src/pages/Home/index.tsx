@@ -200,7 +200,7 @@ const Home: React.FC = () => {
             </div>
           </div>
           {showHourlyData && hourlyData.length > 0 && (
-            <div className="card-body px-5">
+            <div className="card-body px-l-5">
               <Table
                 columns={columns}
                 bordered={true}

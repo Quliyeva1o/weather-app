@@ -1,4 +1,4 @@
-const BASE_URL = 'https://api.weatherapi.com/v1/';
+import { BASE_URL } from "./constants";
 
 function getAll(endpoint: string) {
   return new Promise((resolve, reject) => {
