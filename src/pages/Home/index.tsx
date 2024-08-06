@@ -72,6 +72,8 @@ const Home: React.FC = () => {
   );
 
   useEffect(() => {
+    console.log(weatherData);
+
     if (weatherData) {
       dispatch(fetchHourlyData(weatherData.location.name));
     }
@@ -88,22 +90,40 @@ const Home: React.FC = () => {
     }
   };
 
-  const columns = [
+  const columns:any = [
     {
       title: "Hour",
       dataIndex: "time",
+      align: 'center',
       key: "time",
     },
+
     {
       title: "Temperature",
       dataIndex: "temp_c",
       key: "temp_c",
+      align: 'center',
       render: (text: number) => `${text}°C`,
+    },
+    {
+      title: "Wind",
+      dataIndex: "wind_kph",
+      key: "wind_kph",
+      align: "center",
+      render: (text: number) => `${text}km/h`,
+    },
+    {
+      title: "Rain",
+      dataIndex: "precip_mm",
+      key: "precip_mm",
+      align: "center",
+      render: (text: number) => `${text}%`,
     },
     {
       title: "Condition",
       dataIndex: "condition",
       key: "condition",
+      align: "center",
       render: (condition: any) => (
         <div>
           <Text>{condition.text}</Text>
@@ -175,20 +195,20 @@ const Home: React.FC = () => {
                 </div>
               </Card>
               <p></p>
-              {showHourlyData && hourlyData.length > 0 && (
-                <div className="card-body px-5">
-                  <Table
-                    columns={columns}
-                    bordered={true}
-                    dataSource={hourlyData}
-                    rowKey="time"
-                    pagination={false}
-                    className="weather-table"
-                  />
-                </div>
-              )}
             </div>
           </div>
+          {showHourlyData && hourlyData.length > 0 && (
+            <div className="card-body px-5">
+              <Table
+                columns={columns}
+                bordered={true}
+                dataSource={hourlyData}
+                rowKey="time"
+                pagination={false}
+                className="weather-table"
+              />
+            </div>
+          )}
         </div>
       </section>
       {error && <Text type="danger">Error: {error}</Text>}
