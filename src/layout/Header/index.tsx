@@ -17,7 +17,7 @@ const Header = () => {
             {" "}
             <li className="header-title">
               
-                My Weather App
+                My Wddather App
              
             </li>
           </ul>
