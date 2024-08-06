@@ -11,7 +11,7 @@ export const routes = [
       if (route.index) {
         return { index: true, element: route.element };
       }
-      return { path: route.path, element: route.element };
+      // return { path: route.path, element: route.element };
     }),
   },
 ];
